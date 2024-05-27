@@ -1,0 +1,88 @@
+.featured{
+    padding-top: 120px;
+    padding-bottom: 95px;
+    &__all{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 110px;
+    }
+    &__cont{
+        h1{
+            text-align: center;
+            color: rgb(34, 38, 42);
+            font-size: 35px;
+            font-weight: 600;
+            line-height: 53px;
+        }
+    }
+    &__wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        padding-top: 30px;
+        .featured__card{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            &-info{
+                display: flex;
+                flex-direction: column;
+                gap: 17px;
+                h2{
+                    color: rgb(38, 38, 38);
+                    font-size: 22px;
+                    font-weight: 400;
+                    line-height: -1px;
+                }
+                img{
+                    width: 86px;
+                }
+                &-prices {
+                    display: flex;
+                    gap: 5px;
+                    align-items: center;
+                    h3{
+                        color: rgb(255, 72, 88);
+                        font-size: 20px;
+                        font-weight: 500;
+                        line-height: 30px;
+                    }
+                    h4{
+                        color: rgb(193, 200, 206);
+                        font-size: 20px;
+                        font-weight: 400;
+                        line-height: -1px;
+                        text-decoration: line-through;
+                    }
+                }
+            }
+        }
+    }
+    .search__product{
+        border: 2px solid rgb(188, 221, 254);
+        input{
+            width: 508px;
+            border: none;
+            outline: none;
+            padding: 17px 0 17px 27px;
+        }
+        button{
+            padding: 17px 27px;
+            border: none;
+            outline: none;
+            background: rgb(64, 191, 255);
+            color: rgb(255, 255, 255);
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 30px;
+        }
+    }
+}
+
+@media (max-width: 590px) {
+    .featured {
+        display: none;
+    }
+}

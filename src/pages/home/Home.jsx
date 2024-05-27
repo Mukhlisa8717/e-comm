@@ -4,6 +4,12 @@ import HeroBanner from "../../components/heroBanner/HeroBanner";
 import Category from "../../components/category/Category";
 import Products from "../../components/products/Products";
 import { useGetProductsQuery } from "../../context/productApi";
+import HomeBanner from "../../components/homeBanner/HomeBanner";
+import WhyUsBanner from "../../components/whyUsBanner/WhyUsBanner'";
+import NewsBanner from "../../components/newsBanner/NewsBanner";
+import Featured from "../../components/featured/Featured";
+
+
 
 const Home = () => {
   const { data } = useGetProductsQuery();
@@ -13,7 +19,11 @@ const Home = () => {
       <Hero targetDate={targetDate} />
       <HeroBanner />
       <Category />
-      <Products title={"BEST SELLER"} tabs={true} data={data} />
+      <Products title={"BEST SELLER"} tabs={true} data={data} loadMore={true} productLength={8}/>
+      <HomeBanner />
+      <WhyUsBanner />
+      <NewsBanner />
+      <Featured />
     </main>
   );
 };

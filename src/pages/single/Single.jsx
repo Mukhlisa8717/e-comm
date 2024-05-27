@@ -1,10 +1,21 @@
 import React from "react";
+import SingleProduct from "../../components/sigleProduct/SingleProduct";
+import Products from "../../components/products/Products";
+import { useGetProductsQuery } from "../../context/productApi";
 
 const Single = () => {
+    const { data } = useGetProductsQuery();
   return (
-    <div>
-      <h2>Single</h2>
-    </div>
+    <main>
+      <SingleProduct />
+      <Products
+        title={"RELATED PRODUCTS"}
+        tabs={false}
+        data={data}
+        loadMore={false}
+        productLength={4}
+      />
+    </main>
   );
 };
 

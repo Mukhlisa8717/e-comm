@@ -1,0 +1,90 @@
+.home-banner {
+    background-color: #40bfff;
+    height: 450px;
+    margin-top: 92px;
+    &__cont{
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    &__left{
+        width: 50%;
+        color: white;
+        h1{
+            padding-bottom: 10px;
+            font-size: 55px;
+            font-weight: 500;
+            line-height: 83px;
+        }
+        p{
+            padding-bottom: 20px;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 36px;
+        }
+        button{
+                background-color: transparent;
+                border: none;
+                border-bottom: 2px solid white;
+                color: white;
+                padding-bottom: 3px;
+                cursor: pointer;
+        }
+    }
+    &__left2{
+        display: none;
+    }
+    &__right{
+        position: relative;
+        width: 50%;
+        img{
+            max-width: 630px;
+            position: absolute;
+            top: -210px;
+            width: 100%;
+        }
+    }
+}
+
+
+@media (max-width: 590px){
+    .home-banner{
+        background-color: white;
+        height: 206px;
+        margin-top: 9px;
+        &__cont{
+            width: 95%;
+            background-image: url("../../assets/homeBanner2.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        &__left{
+            display: none;
+        }
+        &__left2{
+            display: flex;
+            color: white;
+            flex-direction: column;
+            gap: 16px;
+            width: 76%;
+            padding: 48px 24px;
+            h1{
+                font-size: 24px;
+                font-weight: 700;
+                line-height: 150%;
+                letter-spacing: 0.5px;
+                text-align: left;
+            }
+            p{
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 180%;
+                letter-spacing: 0.5px;
+                text-align: left;
+            }
+        }
+        &__right{
+            display: none;
+        }
+    }
+}

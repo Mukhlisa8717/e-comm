@@ -1,17 +1,25 @@
-import React from 'react'
-import './Navbar.scss'
-import { NavLink } from 'react-router-dom'
-import { FaRegHeart, FaRegUser } from 'react-icons/fa6';
-import { AiOutlineHeart } from 'react-icons/ai';
-import { FiShoppingCart, FiUser } from 'react-icons/fi';
-import { IoSearchSharp } from 'react-icons/io5';
-import Logo from '../../assets/logo.png'
-import { GoHome, GoTag } from 'react-icons/go';
-import { PiBellBold } from 'react-icons/pi';
+import React, { useState } from "react";
+import "./Navbar.scss";
+import { NavLink } from "react-router-dom";
+import { FaRegHeart, FaRegUser } from "react-icons/fa6";
+import { AiOutlineHeart } from "react-icons/ai";
+import { FiShoppingCart, FiUser } from "react-icons/fi";
+import { IoSearchSharp } from "react-icons/io5";
+import Logo from "../../assets/logo.png";
+import { GoHome, GoTag } from "react-icons/go";
+import { PiBellBold } from "react-icons/pi";
 
 const Navbar = () => {
+  let [shrink, setShrink] = useState(false)
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 120) {
+      setShrink(true)
+    } else{
+      setShrink(false)
+    }
+  })
   return (
-    <header>
+    <header className={`header ${shrink ? "shrink" : ""}`}>
       <div className="container">
         <nav className="navbar navbar__top">
           <div className="navbar__selects">
@@ -58,7 +66,9 @@ const Navbar = () => {
           </div>
         </nav>
         <nav className="navbar navbar__bottom">
-          <img src={Logo} alt="logo" className="navbar__logo" />
+          <NavLink to={"/"}>
+            <img src={Logo} alt="logo" className="navbar__logo" />
+          </NavLink>
           <div className="navbar__links">
             <NavLink to={"/"}>
               <span>Home</span>
@@ -97,6 +107,6 @@ const Navbar = () => {
       </div>
     </header>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
