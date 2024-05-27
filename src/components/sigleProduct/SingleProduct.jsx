@@ -1,26 +1,53 @@
 import React, { useEffect, useState } from "react";
-import './SingleProduct.scss'
+import "./SingleProduct.scss";
 import { useGetProductsQuery } from "../../context/productApi";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import rating from "../../assets/rating.png"
-import { FaFacebookF, FaRegHeart, FaTwitter } from "react-icons/fa6";
+import rating from "../../assets/rating.png";
+import { FaFacebookF, FaHeart, FaRegHeart, FaTwitter } from "react-icons/fa6";
 import { BsCart3 } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, decrementCart, incrementCart } from "../../context/cartSlice";
+import { toggleWishlist } from "../../context/wishlistSlice";
 
 const API_URL = "https://fakestoreapi.com/products";
 
 const SingleProduct = () => {
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist.value);
+  const cart = useSelector((state) => state.cart.value);
+  let { id } = useParams();
+  const [product, setProduct] = useState({});
+  const { data } = useGetProductsQuery();
 
-    let { id } = useParams();
-    const [product, setProduct] = useState({});
-    const { data } = useGetProductsQuery();
-    useEffect(() => {
+  useEffect(() => {
     axios
-        .get(`${API_URL}/${id}`)
-        .then((res) => setProduct(res.data))
-        .catch((err) => console.log(err));
+      .get(`${API_URL}/${id}`)
+      .then((res) => setProduct(res.data))
+      .catch((err) => console.log(err));
     window.scrollTo(0, 0);
-    }, [id]);
+  }, [id]);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
+
+  const handleToggleWishlist = () => {
+    dispatch(toggleWishlist(product));
+  };
+
+  const handleIncrement = () => {
+    dispatch(incrementCart(product));
+  };
+
+  const handleDecrement = () => {
+    dispatch(decrementCart(product));
+  };
+
+  const cartItem = cart.find((item) => item.id === product.id);
+  const quantity = cartItem ? cartItem.quantity : 1;
+  const totalPrice = (product.price * quantity).toFixed(2);
+
   return (
     <section className="single-product">
       <div className="container">
@@ -44,8 +71,8 @@ const SingleProduct = () => {
               </div>
               <hr />
               <div className="single-product__details-right-2">
-                <h3>${product.price}</h3>
-                <h4>${product.price * 2}</h4>
+                <h3>${totalPrice}</h3>
+                <h4>${(totalPrice * 2).toFixed(2)}</h4>
                 <h3 className="product__price-disc">24% Off</h3>
               </div>
               <div className="single-product__details-right-3">
@@ -78,17 +105,21 @@ const SingleProduct = () => {
               </div>
               <div className="single-product__details-right-6">
                 <div className="single-product__details-right-6-1">
-                  <button>-</button>
-                  <p>1</p>
-                  <button>+</button>
+                  <button onClick={handleDecrement}>-</button>
+                  <p>{quantity}</p>
+                  <button onClick={handleIncrement}>+</button>
                 </div>
                 <div className="single-product__details-right-6-2">
-                  <button>
+                  <button onClick={handleAddToCart}>
                     <BsCart3 />
                     Add To Cart
                   </button>
-                  <button>
-                    <FaRegHeart />
+                  <button onClick={handleToggleWishlist}>
+                    {wishlist.some((s) => s.id === product.id) ? (
+                      <FaHeart size={17} color="red" />
+                    ) : (
+                      <FaRegHeart size={17} color="#40bfff" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -109,7 +140,7 @@ const SingleProduct = () => {
             <h2>BEST SELLER</h2>
             <div className="product">
               <div className="product__img">
-                  <img src={product.image} alt="image" />
+                <img src={product.image} alt="image" />
               </div>
               <div className="product__info">
                 <h1>{product.title}</h1>

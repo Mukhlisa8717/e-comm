@@ -18,14 +18,16 @@ export const cartSlice = createSlice({
     incrementCart(state, action) {
       let index = state.value.findIndex((el) => el.id === action.payload.id);
       state.value = state.value.map((product, i) =>
-        index === i ? { ...product, quantity: product.quantity - 1 } : product,
+        index === i ? { ...product, quantity: product.quantity + 1 } : product,
       );
       localStorage.setItem("cart", JSON.stringify(state.value));
     },
     decrementCart(state, action) {
       let index = state.value.findIndex((el) => el.id === action.payload.id);
       state.value = state.value.map((product, i) =>
-        index === i ? { ...product, quantity: product.quantity - 1 } : product,
+        index === i && product.quantity > 1
+          ? { ...product, quantity: product.quantity - 1 }
+          : product,
       );
       localStorage.setItem("cart", JSON.stringify(state.value));
     },
