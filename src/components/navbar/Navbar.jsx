@@ -96,7 +96,7 @@ const Navbar = () => {
             <NavLink to={"/cart"}>
               <FiShoppingCart size={24} color="#8f97b0" />
             </NavLink>
-            <NavLink to={"/tag"}>
+            <NavLink to={"/contact"}>
               <GoTag size={24} color="#8f97b0" />
             </NavLink>
             <NavLink to={"/login"}>
