@@ -190,6 +190,9 @@
             display: block;
             position: relative;
             padding: 0;
+            p{
+                width: auto;
+            }
         }
         &__img{
             width: 100%;
@@ -215,7 +218,7 @@
             }
         }
         &__info{
-            width: 248px;
+            width: 165px;
             position: absolute;
             bottom: 0;
             right: 0;
