@@ -8,12 +8,15 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart(state, action) {
-      let index = state.value.findIndex((el) => el.id === action.payload.id);
-      if (index < 0) {
-        state.value = [...state.value, { ...action.payload, quantity: 1 }];
-      }
-      localStorage.setItem("cart", JSON.stringify(state.value));
+    let index = state.value.findIndex((el) => el.id === action.payload.id);
+    if (index < 0) {
+      state.value = [...state.value, { ...action.payload, quantity: 1 }];
       toast.success("Added to cart");
+    } else {
+      state.value = state.value.filter((el) => el.id !== action.payload.id);
+      toast.error("Removed from cart");
+    }
+    localStorage.setItem("cart", JSON.stringify(state.value));
     },
     incrementCart(state, action) {
       let index = state.value.findIndex((el) => el.id === action.payload.id);

@@ -9,18 +9,20 @@ const Wishlist = () => {
     window.scrollTo(0, 0);
     }, []);
   return (
-    <main>
-      {wishList.length ? (
-        <Products
-          data={wishList}
-          title={"Wishlist"}
-          tabs={false}
-          loadMore={false}
-        />
-      ) : (
-        <Empty />
-      )}
-    </main>
+    <>
+        {wishList.length ? (
+          <main>
+          <Products
+            data={wishList}
+            title={"Wishlist"}
+            tabs={false}
+            loadMore={false}
+          />
+          </main>
+        ) : (
+          <Empty />
+        )}
+    </>
   );
 }
 
