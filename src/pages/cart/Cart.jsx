@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom";
 import Empty from "../../components/empty/Empty";
 import Checkout from "../../components/checkout/Checkout";
-import { IoMdClose } from "react-icons/io";
 import { MdOutlineClose } from "react-icons/md";
 import { toggleWishlist } from "../../context/wishlistSlice";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
@@ -118,7 +117,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            {modal ? <Checkout data={cart} closeModal={setModal} /> : <></>}
+            {modal ? <Checkout products={cart} closeModal={setModal} /> : <></>}
           </div>
         ) : (
           <Empty />
