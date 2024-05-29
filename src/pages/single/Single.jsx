@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SingleProduct from "../../components/sigleProduct/SingleProduct";
 import Products from "../../components/products/Products";
 import { useGetProductsQuery } from "../../context/productApi";
 
 const Single = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     const { data } = useGetProductsQuery();
   return (
     <main>
