@@ -8,6 +8,7 @@ import Single from './pages/single/Single'
 import Cart from './pages/cart/Cart'
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify'
+import Wishlist from './pages/wishlist/Wishlist'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<Single />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
       <ToastContainer />
       <Footer />
