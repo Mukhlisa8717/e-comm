@@ -23,6 +23,10 @@ const Cart = () => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     let subtotal = 0;
     cart.forEach((item) => {
       subtotal += item.price * item.quantity;

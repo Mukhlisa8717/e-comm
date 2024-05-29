@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Hero from "../../components/hero/Hero";
 import HeroBanner from "../../components/heroBanner/HeroBanner";
 import Category from "../../components/category/Category";
@@ -12,6 +12,9 @@ import Featured from "../../components/featured/Featured";
 
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { data } = useGetProductsQuery();
   const targetDate = "2024-07-07T23:59:59";
   return (

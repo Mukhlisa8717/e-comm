@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Contact.scss'
 import { IoIosSend } from 'react-icons/io';
 
@@ -12,6 +12,9 @@ let initialState = {
 };
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   let [data, setData] = useState(initialState);
 
   const handleSubmit = (e) => {
