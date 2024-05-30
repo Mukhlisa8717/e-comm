@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Navbar.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaRegHeart, FaRegUser } from "react-icons/fa6";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
@@ -10,6 +10,7 @@ import { GoHome, GoTag } from "react-icons/go";
 import { PiBellBold } from "react-icons/pi";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   let [shrink, setShrink] = useState(false)
   window.addEventListener("scroll", () => {
     if (window.scrollY > 120) {
@@ -18,6 +19,16 @@ const Navbar = () => {
       setShrink(false)
     }
   })
+
+  const handleLoginClick = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/admin");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <header className={`header ${shrink ? "shrink" : ""}`}>
       <div className="container">
@@ -31,9 +42,9 @@ const Navbar = () => {
             </select>
           </div>
           <div className="navbar__menu">
-            <NavLink to={"/login"}>
+            <div onClick={handleLoginClick} style={{ cursor: "pointer" }}>
               <FaRegUser size={21} color="black" />
-            </NavLink>
+            </div>
             <NavLink to={"/wishlist"}>
               <AiOutlineHeart size={24} color="black" />
             </NavLink>
@@ -99,9 +110,9 @@ const Navbar = () => {
             <NavLink to={"/contact"}>
               <GoTag size={24} color="#8f97b0" />
             </NavLink>
-            <NavLink to={"/login"}>
-              <FiUser size={24} color="#8f97b0" />
-            </NavLink>
+            <div onClick={handleLoginClick} style={{ cursor: "pointer" }}>
+              <FaRegUser size={24} color="#8f97b0" />
+            </div>
           </div>
         </nav>
       </div>

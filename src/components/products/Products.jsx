@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Products.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWishlist } from "../../context/wishlistSlice";
@@ -7,12 +7,22 @@ import { addToCart } from "../../context/cartSlice";
 import { TbShoppingCart } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import Rating from "../../assets/rating.png";
+import Skeleton from "../skeleton/Skeleton";
+import { useGetCategoryQuery } from "../../context/categoryApi";
+import { useGetProductsQuery } from "../../context/productApi";
 
-const Products = ({ title, tabs, data, loadMore, productLength }) => {
+const Products = ({ title, category, data, loadMore, productLength }) => {
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.value);
   const [visibleCount, setVisibleCount] = useState(productLength);
+  const [selectedCategory, setSelectedCategory] = useState("/");
   const maxLength = 20;
+  let { data: categories } = useGetCategoryQuery();
+  const { isLoading } = useGetProductsQuery();
+
+  useEffect(() => {
+    console.log(categories);
+  }, [categories]);
 
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 8);
@@ -22,7 +32,12 @@ const Products = ({ title, tabs, data, loadMore, productLength }) => {
     return text.length > length ? `${text.substring(0, length)}...` : text;
   };
 
-  let productItem = data?.slice(0, visibleCount).map((el) => (
+  const filteredProducts = data?.filter(
+    (el) =>
+      selectedCategory === "/" || el.category === selectedCategory.slice(10),
+  );
+
+  let productItem = filteredProducts?.slice(0, visibleCount).map((el) => (
     <div key={el.id} className="product">
       <div className="product__img">
         <div className="product__hover">
@@ -52,25 +67,52 @@ const Products = ({ title, tabs, data, loadMore, productLength }) => {
       </div>
     </div>
   ));
+
+  if (isLoading) {
+    return <Skeleton count={8} />;
+  }
+
   return (
     <section className="products">
       <div className="container products__content">
         <div className="products__top">
           <h2>{title}</h2>
-          {tabs ? (
+          {category ? (
             <ul className="tabs__list">
-              <li>All</li>
-              <li>Bags</li>
-              <li>Sneakers</li>
-              <li>Belt</li>
-              <li>Sunglasses</li>
+              <li>
+                <data
+                  onClick={() => setSelectedCategory("/")}
+                  value="/"
+                  className={selectedCategory === "/" ? "active" : ""}
+                >
+                  All
+                </data>
+              </li>
+              {categories?.map((el) => (
+                <li key={el}>
+                  <data
+                    onClick={() => {
+                      setSelectedCategory(`/category/${el}`);
+                      setVisibleCount(productLength);
+                    }}
+                    value={`/category/${el}`}
+                    className={
+                      selectedCategory === `/category/${el}` ? "active" : ""
+                    }
+                  >
+                    {el}
+                  </data>
+                </li>
+              ))}
             </ul>
           ) : (
             ""
           )}
         </div>
         <div className="products__list">{productItem}</div>
-        {loadMore ? (
+        {loadMore &&
+        selectedCategory === "/" &&
+        visibleCount < filteredProducts.length ? (
           <button className="load-more__btn" onClick={handleLoadMore}>
             LOAD MORE
           </button>

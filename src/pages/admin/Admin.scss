@@ -1,0 +1,39 @@
+.admin {
+    padding-top: 171px;
+    padding-bottom: 101px;
+    &__cont{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        h1{
+            color: rgb(0, 0, 0);
+            font-size: 40px;
+            font-weight: 500;
+            line-height: 60px;
+            letter-spacing: -2%;
+        }
+        p{
+            color: rgb(0, 0, 0);
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 180%;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+        button{
+            width: 200px;
+            padding: 10px 15px;
+            background-color: rgba(51, 160, 255, 1);
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;         
+        }
+    }
+}
+
+@media (max-width: 590px) {
+    .admin{
+        padding-top: 88px;
+    }
+}

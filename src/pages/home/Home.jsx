@@ -22,7 +22,7 @@ const Home = () => {
       <Hero targetDate={targetDate} />
       <HeroBanner />
       <Category />
-      <Products title={"BEST SELLER"} tabs={true} data={data} loadMore={true} productLength={8}/>
+      <Products title={"BEST SELLER"} category={true} data={data} loadMore={true} productLength={8}/>
       <HomeBanner />
       <WhyUsBanner />
       <NewsBanner />

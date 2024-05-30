@@ -15,7 +15,7 @@ const Wishlist = () => {
           <Products
             data={wishList}
             title={"Wishlist"}
-            tabs={false}
+            category={false}
             loadMore={false}
           />
           </main>

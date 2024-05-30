@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./Cart.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addToCart,
   decrementCart,
   incrementCart,
   removeFromCart,
