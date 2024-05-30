@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SingleProduct.scss";
-import { useGetProductsQuery } from "../../context/productApi";
+import { useGetProductDetailQuery, useGetProductsQuery } from "../../context/productApi";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import rating from "../../assets/rating.png";
@@ -10,23 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, decrementCart, incrementCart } from "../../context/cartSlice";
 import { toggleWishlist } from "../../context/wishlistSlice";
 
-const API_URL = "https://fakestoreapi.com/products";
-
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.wishlist.value);
   const cart = useSelector((state) => state.cart.value);
-  let { id } = useParams();
-  const [product, setProduct] = useState({});
-  const { data } = useGetProductsQuery();
-
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/${id}`)
-      .then((res) => setProduct(res.data))
-      .catch((err) => console.log(err));
-    window.scrollTo(0, 0);
-  }, [id]);
+  const { id } = useParams();
+  const { data: product, isLoading, isError } = useGetProductDetailQuery(id);
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
@@ -44,6 +33,12 @@ const SingleProduct = () => {
     dispatch(decrementCart(product));
   };
 
+  if (isLoading) return (
+    <div className="loading">
+      <h2>Loading...</h2>
+    </div>
+  );
+  
   const cartItem = cart.find((item) => item.id === product.id);
   const quantity = cartItem ? cartItem.quantity : 1;
   const totalPrice = (product.price * quantity).toFixed(2);
