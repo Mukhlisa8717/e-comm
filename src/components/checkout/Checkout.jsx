@@ -34,12 +34,17 @@ const Checkout = ({ products, closeModal }) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-    const handlePaymentChange = (e) => {
-        setPaymentMethod(e.target.value);
-    };
+  const handlePaymentChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!paymentMethod) {
+      toast.error("Please select a payment method");
+      return;
+    }
+
     let text = "";
     text += `Ism: ${data.firstname} %0A`;
     text += `Familiya: ${data.lastname} %0A`;
@@ -79,15 +84,15 @@ const Checkout = ({ products, closeModal }) => {
             <FaXmark color="#40BFFF" size={22} />
           </button>
         </div>
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <div className="form__cont">
             {Object.keys(initialState)?.map((el) => (
               <input
                 key={el}
                 value={data[el]}
-                placeholder={el}
+                placeholder={el.charAt(0).toUpperCase() + el.slice(1)}
                 onChange={handleChange}
-                type="text"
+                type={el === "email" ? "email" : "text"}
                 name={el}
                 required
               />
@@ -104,6 +109,7 @@ const Checkout = ({ products, closeModal }) => {
                   name="payment"
                   value="creditCard"
                   onChange={handlePaymentChange}
+                  required
                 />
                 <label htmlFor="creditCard"></label>
               </li>
@@ -137,7 +143,7 @@ const Checkout = ({ products, closeModal }) => {
               </li>
             </ul>
           </div>
-          <button onClick={handleSubmit}>Go to Payment</button>
+          <button type="submit">Go to Payment</button>
         </form>
       </div>
     </div>
