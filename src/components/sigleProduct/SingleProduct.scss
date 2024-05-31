@@ -146,6 +146,7 @@
                 select{
                     padding: 10px 16px;
                     border: 2px solid rgb(241, 243, 244);
+                    cursor: pointer;
                 }
             }
             &-6{
@@ -170,6 +171,7 @@
                         font-size: 20px;
                         padding: 22px 26px;
                         color: rgba(51, 160, 255, 1);
+                        cursor: pointer;
                     }
                 }
                 &-2{
@@ -186,6 +188,7 @@
                             border: none;
                             background-color: #ebf6ff;
                             border-radius: 5px;
+                            cursor: pointer;
                     }
                 }
             }

@@ -71,17 +71,13 @@ const Checkout = ({ products, closeModal }) => {
     <div className="modal">
       <div className="modal__cont">
         <div className="modal__top">
-          <FaArrowLeft
-            color="#40BFFF"
-            size={22}
-            onClick={() => closeModal(false)}
-          />
+          <button onClick={() => closeModal(false)} className="modal__top-btn">
+            <FaArrowLeft color="#40BFFF" size={22} />
+          </button>
           <h2>Make Payment</h2>
-          <FaXmark
-            color="#40BFFF"
-            size={22}
-            onClick={() => closeModal(false)}
-          />
+          <button onClick={() => closeModal(false)} className="modal__top-btn">
+            <FaXmark color="#40BFFF" size={22} />
+          </button>
         </div>
         <form className="form">
           <div className="form__cont">
