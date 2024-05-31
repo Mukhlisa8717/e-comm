@@ -89,6 +89,7 @@ const Checkout = ({ products, closeModal }) => {
                 onChange={handleChange}
                 type="text"
                 name={el}
+                required
               />
             ))}
             <ul className="form__cards">

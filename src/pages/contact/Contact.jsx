@@ -53,6 +53,7 @@ const Contact = () => {
                 type="text"
                 id="fullname"
                 placeholder="James Doe"
+                required
               />
               <label htmlFor="email">Email</label>
               <input
@@ -63,6 +64,7 @@ const Contact = () => {
                 type="email"
                 id="email"
                 placeholder="jamesdoe@gmail.com"
+                required
               />
               <label htmlFor="message">Message</label>
               <textarea
@@ -74,6 +76,7 @@ const Contact = () => {
                 id="message"
                 rows="10"
                 placeholder="Type your message"
+                required
               ></textarea>
               <button>
                 <IoIosSend color="white" size={16} />
