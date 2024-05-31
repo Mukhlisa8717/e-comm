@@ -100,7 +100,7 @@ const Cart = () => {
               <div className="cart__total">
                 <div className="cart__total-item">
                   <p>Subtotal:</p>
-                  <p>${subtotal}</p>
+                  <p>${subtotal.toFixed(2)}</p>
                 </div>
                 <div className="cart__total-item">
                   <p>Shipping:</p>
@@ -113,7 +113,7 @@ const Cart = () => {
                 <hr />
                 <div className="cart__total-item">
                   <h2>TOTAL:</h2>
-                  <h2>${total}</h2>
+                  <h2>${total.toFixed(2)}</h2>
                 </div>
                 <div className="cart__total-btn">
                   <button onClick={() => setModal(true)}>Check out</button>

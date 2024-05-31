@@ -156,6 +156,9 @@
             width: 165px;
             &__img{
                 height: 200px;
+                img{
+                    padding: 26px 22px;
+                }
             }
             .product__content-prices{
                 flex-wrap: wrap;
